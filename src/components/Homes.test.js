@@ -2,6 +2,7 @@ import { render, getAllByTestId, getNodeText } from "@testing-library/react";
 import React from "react";
 import { act } from "react-dom/test-utils";
 import apiClient from "../services/apiClient";
+import bookingDialogService from "../services/bookingDialogService";
 import Homes from "./Homes";
 
 let container = null;
@@ -62,4 +63,23 @@ it("should show home location", () => {
 it("should show home price", () => {
   const homesPrices = getAllByTestId(container, "home-price");
   expect(getNodeText(homesPrices[0])).toBe("$1/night");
+});
+
+it("should show home booking button", () => {
+  const homeBookingButtons = getAllByTestId(container, "home-booking-button");
+  expect(homeBookingButtons[0]).toBeTruthy();
+});
+
+it("should open home booking dialog when clicking the button", () => {
+  jest.spyOn(bookingDialogService, "open").mockImplementation(() => {});
+
+  const homeBookingButtons = getAllByTestId(container, "home-booking-button");
+  homeBookingButtons[0].click();
+  expect(bookingDialogService.open).toHaveBeenCalled();
+  expect(bookingDialogService.open).toHaveBeenCalledWith({
+    title: "Test Home 1",
+    image: "listing.jpg",
+    location: "Test Location 1",
+    price: 1,
+  });
 });
