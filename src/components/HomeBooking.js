@@ -38,27 +38,50 @@ function HomeBooking(props) {
   }
   return (
     <>
-      <div data-testid="title">{props.home.title}</div>
-      <div data-testid="price">{props.home.price}</div>
-      <input
-        data-testid="check-in"
-        onChange={(e) => setCheckInDate(e.target.value)}
-        type="date"
-      />
-      <input
-        data-testid="check-out"
-        onChange={(e) => setCheckOutDate(e.target.value)}
-        type="date"
-      />
-      <div data-testid="total">{totalPrice}</div>
-
-      <button
-        data-testid="book-btn"
-        onClick={handleBooking}
-        className="btn btn-primary"
-      >
-        Book
-      </button>
+      <h2 data-testid="title">{props.home.title}</h2>
+      <div data-testid="price" className="mb-3">
+        <span className="font-weight-bold text-primary text-large">
+          USD {props.home.price}
+        </span>{" "}
+        per night
+      </div>
+      <div className="form-group">
+        <label htmlFor="checkInDate">Check-In Date</label>
+        <br />
+        <input
+          id="checkInDate"
+          data-testid="check-in"
+          className="form-control"
+          onChange={(e) => setCheckInDate(e.target.value)}
+          type="date"
+        />
+      </div>
+      <br />
+      <div className="form-group">
+        <label htmlFor="checkOutDate">Check-Out Date</label>
+        <br />
+        <input
+          id="checkOutDate"
+          data-testid="check-out"
+          className="form-control"
+          onChange={(e) => setCheckOutDate(e.target.value)}
+          type="date"
+        />
+      </div>
+      <div data-testid="total" className="my-3 text-right">
+        <span className="font-weight-bold text-large">
+          Total: USD {totalPrice}
+        </span>
+      </div>
+      <div className="d-flex justify-content-end">
+        <button
+          data-testid="book-btn"
+          onClick={handleBooking}
+          className="btn btn-primary"
+        >
+          Book
+        </button>
+      </div>
     </>
   );
 }

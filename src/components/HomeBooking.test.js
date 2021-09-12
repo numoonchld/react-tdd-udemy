@@ -30,7 +30,7 @@ it("should show title", () => {
 });
 // should show price
 it("should show price", () => {
-  expect(getByTestId(container, "price").textContent).toBe("125");
+  expect(getByTestId(container, "price").textContent).toBe("USD 125 per night");
 });
 // should show check-in date field
 it("should show check-in date field", () => {
@@ -51,7 +51,7 @@ it("should calculate total cost", () => {
     target: { value: "2021-12-07" },
   });
   // assert total cost should show: 3*125=375
-  expect(getByTestId(container, "total").textContent).toBe("375");
+  expect(getByTestId(container, "total").textContent).toBe("Total: USD 375");
 });
 // should show book home after clicking the book button
 it("should show empty when no home is provided", () => {
