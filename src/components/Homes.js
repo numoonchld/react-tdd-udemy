@@ -81,9 +81,10 @@ function Homes() {
         <Dialog
           open={bookingDialogState.open}
           onClose={() => bookingDialogService.close()}
+          maxWidth="xs"
+          fullWidth={true}
         >
           <DialogContent>
-            {bookingDialogState.home ? bookingDialogState.home.title : null}
             <HomeBooking home={bookingDialogState.home} />
           </DialogContent>
         </Dialog>
