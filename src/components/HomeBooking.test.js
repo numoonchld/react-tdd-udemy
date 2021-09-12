@@ -53,6 +53,20 @@ it("should calculate total cost", () => {
   // assert total cost should show: 3*125=375
   expect(getByTestId(container, "total").textContent).toBe("Total: USD 375");
 });
+
+// should handle invalid date range
+it("should show '--' for invalid dates", () => {
+  // enter check-in date: 2021-12-04
+  fireEvent.change(getByTestId(container, "check-in"), {
+    target: { value: "2021-12-04" },
+  });
+  // enter check-out date: 2021-12-02
+  fireEvent.change(getByTestId(container, "check-out"), {
+    target: { value: "2021-12-02" },
+  });
+  // assert total cost should show: 3*125=375
+  expect(getByTestId(container, "total").textContent).toBe("Total: USD --");
+});
 // should show book home after clicking the book button
 it("should show empty when no home is provided", () => {
   // spy on apiClient

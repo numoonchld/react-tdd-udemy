@@ -16,7 +16,7 @@ function HomeBooking(props) {
     const nights = checkOutDataFormatted.diff(checkInDataFormatted, "days");
 
     const totalCalc = nights * price;
-    if (Number.isInteger(totalCalc)) {
+    if (totalCalc > 0) {
       setTotalPrice(totalCalc);
     } else {
       setTotalPrice("--");
