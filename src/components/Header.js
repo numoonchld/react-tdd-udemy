@@ -4,7 +4,7 @@ function Header() {
   return (
     <>
       <nav className="py-3 border-bottom navbar navbar-expand navbar-light">
-        <a data-testid="logo" href="#" className="navbar-brand">
+        <a data-testid="logo" href="/#" className="navbar-brand">
           <img src="logo192.png" width="40" alt="logo" />
         </a>
         <form data-testid="search" className="mr-auto w-50 form-inline">
@@ -15,16 +15,16 @@ function Header() {
           />
         </form>
         <div data-testid="menu" className="ml-auto text-uppercase navbar-nav">
-          <a href="#home" className="nav-link">
+          <a href="/#home" className="nav-link">
             Become a host
           </a>
-          <a href="#link" className="nav-link">
+          <a href="/#link" className="nav-link">
             Help
           </a>
-          <a href="#link" className="nav-link">
+          <a href="/#link" className="nav-link">
             Sign Up
           </a>
-          <a href="#link" className="nav-link">
+          <a href="/#link" className="nav-link">
             Login
           </a>
         </div>

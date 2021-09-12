@@ -58,3 +58,8 @@ it("should show home location", () => {
   const homesLocations = getAllByTestId(container, "home-location");
   expect(getNodeText(homesLocations[0])).toBe("Test Location 1");
 });
+
+it("should show home price", () => {
+  const homesPrices = getAllByTestId(container, "home-price");
+  expect(getNodeText(homesPrices[0])).toBe("$1/night");
+});
