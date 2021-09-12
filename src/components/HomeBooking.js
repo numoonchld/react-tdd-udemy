@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import apiClient from "../services/apiClient";
+import bookingDialogService from "../services/bookingDialogService";
+import notificationService from "../services/notificationService";
 
 function HomeBooking(props) {
   const [checkInDate, setCheckInDate] = useState(null);
@@ -23,7 +25,12 @@ function HomeBooking(props) {
   }, [checkInDate, checkOutDate, props]);
 
   const handleBooking = () => {
-    apiClient.bookHome(props.home, checkInDate, checkOutDate);
+    apiClient
+      .bookHome(props.home, checkInDate, checkOutDate)
+      .then((message = "Mocked home booked!") => {
+        bookingDialogService.close();
+        notificationService.open(message);
+      });
   };
 
   if (!props.home) {
@@ -45,7 +52,11 @@ function HomeBooking(props) {
       />
       <div data-testid="total">{totalPrice}</div>
 
-      <button data-testid="book-btn" onClick={handleBooking}>
+      <button
+        data-testid="book-btn"
+        onClick={handleBooking}
+        className="btn btn-primary"
+      >
         Book
       </button>
     </>

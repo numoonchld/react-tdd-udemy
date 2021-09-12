@@ -2,6 +2,9 @@ import { render, getByTestId, fireEvent } from "@testing-library/react";
 import React from "react";
 import HomeBooking from "./HomeBooking";
 import apiClient from "../services/apiClient";
+import notificationService from "../services/notificationService";
+import bookingDialogService from "../services/bookingDialogService";
+import { act } from "react-dom/test-utils";
 
 let container = null;
 
@@ -78,7 +81,35 @@ it("should show empty when no home is provided", () => {
   );
 });
 // should close dialog and show notification after booking home
+it("should close dialog and show notification after booking home", async () => {
+  // spy on api client
+  jest.spyOn(apiClient, "bookHome").mockImplementation(() => Promise.resolve());
+  // spy on booking dialog service
+  jest.spyOn(bookingDialogService, "close").mockImplementation(() => {});
+  // spy on notification service
+  jest.spyOn(notificationService, "open").mockImplementation(() => {});
 
+  // enter dates and click book
+  // select dates
+  // enter check-in date: 2021-12-04
+  fireEvent.change(getByTestId(container, "check-in"), {
+    target: { value: "2021-12-04" },
+  });
+  // enter check-out date: 2021-12-07
+  fireEvent.change(getByTestId(container, "check-out"), {
+    target: { value: "2021-12-07" },
+  });
+
+  // click book button
+  getByTestId(container, "book-btn").click();
+  await act(async () => {});
+  // assert dialog service closed the dialog
+  expect(bookingDialogService.close).toHaveBeenCalled();
+  // assert that notification service posted a notification
+  expect(notificationService.open).toHaveBeenCalledWith("Mocked home booked!");
+});
+
+// handle bugs
 it("should show empty when no home is provided", () => {
   const nullContainer = render(<HomeBooking home={null} />).container;
   expect(getByTestId(nullContainer, "empty")).toBeTruthy;
